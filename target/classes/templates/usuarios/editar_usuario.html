@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="master">
+<div th:replace="~{layouts/encabezado :: encabezado}"></div>
+
+<body>
+	<div th:replace="~{layouts/navbar :: navbar}"></div>
+	<main class="container" layout:fragment="contenido">
+		<div class="col-12">
+			<h2>Editar cuenta de usuario</h2>
+			<form th:object="${usuario}" th:action="@{/usuarios/editar/} + ${usuario.id}" method="post">
+				<input type="hidden" th:field="*{id}">
+				<div class="form-group">
+					<label for="nombre">Nombre:</label>
+					<input autocomplete="off" autofocus th:field="*{nombre}" id="nombre"
+						placeholder="Escribe el nombre del usuario" type="text" class="form-control"
+						th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid' : ''">
+					<div class="invalid-feedback" th:errors="*{nombre}"></div>
+				</div>
+				<div class="form-group">
+					<label for="nombre">Apellido:</label>
+					<input autocomplete="off" autofocus th:field="*{apellido}" id="nombre"
+						placeholder="Escribe el apellido del usuario" type="text" class="form-control"
+						th:classappend="${#fields.hasErrors('apellido')} ? 'is-invalid' : ''">
+					<div class="invalid-feedback" th:errors="*{apellido}"></div>
+				</div>
+				<div class="form-group">
+					<label for="nombre">Correo:</label>
+					<input autocomplete="off" autofocus th:field="*{correo}" id="nombre"
+						placeholder="Escribe el correo del usuario" type="text" class="form-control"
+						th:classappend="${#fields.hasErrors('correo')} ? 'is-invalid' : ''">
+					<div class="invalid-feedback" th:errors="*{correo}"></div>
+				</div>
+				<div class="form-group">
+					<label for="nombre">Contraseña:</label>
+					<input autocomplete="off" autofocus th:field="*{password}" id="nombre"
+						placeholder="Escribe la contraseña del usurio" type="text" class="form-control"
+						th:classappend="${#fields.hasErrors('password')} ? 'is-invalid' : ''">
+					<div class="invalid-feedback" th:errors="*{password}"></div>
+				</div>
+				<button class="btn btn-success" type="submit">Guardar</button>
+				&nbsp;<a class="btn btn-warning" th:href="@{/usuarios/mostrar}">Ver todos</a>
+			</form>
+		</div>
+	</main>
+	<div th:replace="~{layouts/pie :: pie}"></div>
+</body>
+
+</html>

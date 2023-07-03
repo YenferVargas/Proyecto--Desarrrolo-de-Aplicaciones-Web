@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <div th:replace="~{layouts/encabezado :: encabezado}"></div>
+  <body>
+  	<div th:replace="~{layouts/navbar :: navbar}"></div>
+    <div class="container">
+    	<div class="col-12">
+    		<h2 class="text-center">Usuarios</h2>
+    		<div class="table-responsive">
+    			<table class="table table-secondary table-striped">
+	                <thead>
+		                <tr>
+		                	<th>Codigo</th>
+		                    <th>Nombre</th>
+		                    <th>Apellido</th>
+		                    <th>Correo</th>
+		                    
+		                    <th>Editar</th>
+		                    <th>Eliminar</th>
+		                </tr>
+	                </thead>
+	                <tbody>
+		                <tr th:each="usuario : ${listaUsuarios}">
+		                    <td th:text="${usuario.id}"></td>
+		                    <td th:text="${usuario.nombre}"></td>
+		                    <td th:text="${usuario.apellido}"></td>
+		                    <td th:text="${usuario.correo}"></td>
+		                    <td>
+		                        <a class="btn btn-primary" th:href="@{/usuarios/editar/} + ${usuario.id}">Editar <i
+		                                class="fa fa-edit"></i></a>
+		                    </td>
+		                    <td>
+		                        <form th:action="@{/usuarios/eliminar}" method="post">
+		                            <input type="hidden" name="id" th:value="${usuario.id}"/>
+		                            <button type="submit" class="btn btn-danger">Eliminar <i class="fa fa-trash"></i>
+		                            </button>
+		                        </form>
+		                    </td>
+		                </tr>
+	                </tbody>
+	            </table>
+    		</div>
+    	</div>
+    </div>
+    <div th:replace="~{layouts/pie :: pie}"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>
